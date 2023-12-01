@@ -11,10 +11,19 @@ class Post extends Model
     use HasUuids;
 
     protected $table = 'posts';
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     protected $fillable = [
         'title',
+        'slug',
         'body',
         'published',
+        'draft'
+    ];
+
+    protected $guarded = [
+        'created_at',
+        'published_at'
     ];
 }

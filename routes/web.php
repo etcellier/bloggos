@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PostController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,13 +24,20 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/posts', function() {
-    return view('posts.list');
-})->middleware(['auth', 'verified'])->name('posts.list');
+Route::get('/posts', [PostController::class, 'list'])->middleware(['auth', 'verified'])->name('posts.list');
 
 Route::get('/posts/add', function() {
     return view('posts.add');
 })->middleware(['auth', 'verified'])->name('posts.add');
+
+Route::post('/posts/add', [PostController::class, 'add'])->middleware(['auth', 'verified'])->name('posts.add');
+
+Route::get('/posts/edit/{id}', function($id) {
+    $post = Post::find($id);
+    return view('posts.edit', ["post" => $post]);
+})->middleware(['auth', 'verified'])->name('posts.update');
+
+Route::post('/posts/edit/{id}', [PostController::class, "update"])->middleware(['auth', 'verified'])->name('posts.update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

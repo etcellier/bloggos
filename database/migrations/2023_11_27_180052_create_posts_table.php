@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('title');
-            $table->text('body');
+            $table->string('title')->default("test");
+            $table->text('body')->nullable();
             $table->boolean('published')->default(false);
+            $table->boolean('draft')->default(true);
             $table->timestamps();
         });
     }
