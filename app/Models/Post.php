@@ -19,10 +19,15 @@ class Post extends Model
         'slug',
         'body',
         'published',
-        'draft'
+        'draft',
+        'allow_comments',
+        'allow_likes',
+        'category_id',
     ];
 
     protected $guarded = [
+        'id',
+        'user_id',
         'created_at',
         'published_at'
     ];
