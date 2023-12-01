@@ -103,7 +103,7 @@
                                         </div>
                                     </fieldset>
                                     <div class="mt-6 flex items-center justify-end gap-x-6">
-                                        <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Annuler</button>
+                                        <a href="{{ route("posts.list") }}" type="button" class="text-sm font-semibold leading-6 text-gray-900">Annuler</a>
                                         <button type="submit" class="rounded-md transition-all bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Publier</button>
                                     </div>
                                 </div>

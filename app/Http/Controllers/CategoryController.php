@@ -32,8 +32,9 @@ class CategoryController extends Controller
         return redirect()->route('category.update', [$id])->with('success', "La catégorie a bien été modifiée.");
     }
 
-    public function add(CategoryRequest $request)
+    public function create(CategoryRequest $request)
     {
+        dd($request);
         $datas = [
             "name" => $request->get("name"),
             "slug" => $request->get("slug"),
@@ -47,7 +48,7 @@ class CategoryController extends Controller
 
         $newCategory->save();
 
-        return redirect()->route('category.update', [$newCategory->id])->with('success', "La catégorie a bien été créée.");
+        return redirect()->route('category.list')->with('success', "La catégorie a bien été créée.");
     }
 
     public function delete($id)

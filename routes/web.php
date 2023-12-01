@@ -57,7 +57,7 @@ Route::get('/categories', [CategoryController::class, 'list'])->middleware(['aut
 Route::get('/categories/add', function () {
     return view('category.add');
 })->middleware(['auth', 'verified'])->name('category.add');
-Route::post('/categories/add', [CategoryController::class, 'add'])->middleware(['auth', 'verified'])->name('category.add');
+Route::post('/categories/add', [CategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('category.add');
 Route::get('/categories/edit/{id}', function ($id) {
     $category = Category::find($id);
     return view('category.edit', ["category" => $category]);

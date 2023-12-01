@@ -21,6 +21,16 @@
                         {{ __('Posts') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('category.list')" :active="in_array(request()->route()->getName(), ['category.list', 'category.add', 'category.update'])">
+                        {{ __('Catégories') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('tag.list')" :active="in_array(request()->route()->getName(), ['tag.list', 'tag.add', 'tag.update'])">
+                        {{ __('Tags') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

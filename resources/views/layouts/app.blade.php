@@ -11,6 +11,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
         <!-- Scripts -->
         <script src="https://cdn.tiny.cloud/1/raa1rh70sl8hbyamtp9v8jm5yy6qa7mn3um0w0craca129t5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
