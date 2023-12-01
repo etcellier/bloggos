@@ -29,12 +29,11 @@ class CategoryController extends Controller
 
         $newCategory->save();
 
-        return redirect()->route('category.update', [$id])->with('success', "La catégorie a bien été modifiée.");
+        return redirect()->route('category.list', [$id])->with('success', "La catégorie a bien été modifiée.");
     }
 
     public function create(CategoryRequest $request)
     {
-        dd($request);
         $datas = [
             "name" => $request->get("name"),
             "slug" => $request->get("slug"),

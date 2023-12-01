@@ -16,34 +16,48 @@
                                     @csrf
                                     <label class="block">
                                         <span class="block text-sm font-medium text-slate-700">Titre</span>
-                                        <input value="{{ $category->name }}" required placeholder="Titre de la catégorie" name="title" type="text" class="mt-1 transition-all block w-full px-3 py-2 gb-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
-                                        @error('title')
-                                        <div class="flex bg-yellow-100 dark:bg-yellow-300 text-slate-600 items-start gap-4 rounded-sm shadow-sm mt-2 p-4">
+                                        <input value="{{ $category->name }}" required
+                                               placeholder="Titre de la catégorie" name="name" type="text"
+                                               class="mt-1 transition-all block w-full px-3 py-2 gb-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                                        @error('name')
+                                        <div
+                                            class="flex bg-yellow-100 dark:bg-yellow-300 text-slate-600 items-start gap-4 rounded-sm shadow-sm mt-2 p-4">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </label>
                                     <label class="block mt-3">
                                         <span class="block text-sm font-medium text-slate-700">Slug</span>
-                                        <input value="{{ $category->slug }}" required placeholder="Slug de la categorie" name="slug" type="text" class="mt-1 transition-all block w-full px-3 py-2 gb-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" pattern="[a-z0-9-]+">
+                                        <input value="{{ $category->slug }}" required placeholder="Slug de la categorie"
+                                               name="slug" type="text"
+                                               class="mt-1 transition-all block w-full px-3 py-2 gb-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                                               pattern="[a-z0-9-]+">
                                         @error('slug')
-                                        <div class="flex bg-yellow-100 dark:bg-yellow-300 text-slate-600 items-start gap-4 rounded-sm shadow-sm mt-2 p-4">
+                                        <div
+                                            class="flex bg-yellow-100 dark:bg-yellow-300 text-slate-600 items-start gap-4 rounded-sm shadow-sm mt-2 p-4">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </label>
                                     <label class="block mt-3">
                                         <span class="block text-sm font-medium text-slate-700">Color</span>
-                                        <input value="{{ $category->color }}" type="text" name="color" class="mt-1 transition-all block w-full px-3 py-2 gb-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" data-coloris>
+                                        <input value="{{ $category->color }}" type="text" name="color"
+                                               class="mt-1 transition-all block w-full px-3 py-2 gb-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                                               data-coloris>
                                         @error('color')
-                                        <div class="flex bg-yellow-100 dark:bg-yellow-300 text-slate-600 items-start gap-4 rounded-sm shadow-sm mt-2 p-4">
+                                        <div
+                                            class="flex bg-yellow-100 dark:bg-yellow-300 text-slate-600 items-start gap-4 rounded-sm shadow-sm mt-2 p-4">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </label>
                                     <div class="mt-6 flex items-center justify-end gap-x-6">
-                                        <a href="{{ route("category.list") }}" type="button" class="text-sm font-semibold leading-6 text-gray-900">Annuler</a>
-                                        <button type="submit" class="rounded-md transition-all bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Sauvegarder</button>
+                                        <a href="{{ route("category.list") }}" type="button"
+                                           class="text-sm font-semibold leading-6 text-gray-900">Annuler</a>
+                                        <button type="submit"
+                                                class="rounded-md transition-all bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                                            Sauvegarder
+                                        </button>
                                     </div>
                                 </div>
                             </div>

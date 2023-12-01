@@ -28,7 +28,7 @@ class TagController extends Controller
 
         $newTag->save();
 
-        return redirect()->route('tag.update', [$id])->with('success', "Le tag a bien été modifié.");
+        return redirect()->route('tag.list', [$id])->with('success', "Le tag a bien été modifié.");
     }
 
     public function add(Request $request)
@@ -46,7 +46,7 @@ class TagController extends Controller
 
         $newTag->save();
 
-        return redirect()->route('tag.update', [$newTag->id])->with('success', "Le tag a bien été créé.");
+        return redirect()->route('tag.list', [$newTag->id])->with('success', "Le tag a bien été créé.");
     }
 
     public function delete($id)
