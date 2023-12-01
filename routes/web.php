@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
@@ -19,10 +22,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -79,5 +78,11 @@ Route::get('/tags/edit/{id}', function ($id) {
     return view('tag.edit', ["tag" => $tag]);
 })->middleware(['auth', 'verified'])->name('tag.update');
 Route::post('/tags/edit/{id}', [TagController::class, 'update'])->middleware(['auth', 'verified'])->name('tag.update');
+
+
+Route::get('/', [HomeController::class, 'index'])->name('app.index');
+Route::post('/', [CommentController::class, 'submit'])->name('app.index');
+Route::get('/like', [LikeController::class, 'like'])->name('app.action.like');
+Route::get('/unlike', [LikeController::class, 'unlike'])->name('app.action.unlike');
 
 require __DIR__ . '/auth.php';
