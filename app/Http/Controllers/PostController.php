@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddPostRequest;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -20,7 +21,8 @@ class PostController extends Controller
             "body" => $request->get("content"),
             "published" => 0,
             "draft" => 1,
-            "slug" => $request->get("slug")
+            "slug" => $request->get("slug"),
+            "category_id" => $request->get("category")
         ];
 
         if ($request->get("comments") !== null && $request->get("comments") === "on") {
@@ -43,6 +45,8 @@ class PostController extends Controller
         $newPost->slug = $datas["slug"];
         $newPost->allow_comments = $datas["allow_comments"];
         $newPost->allow_likes = $datas["allow_likes"];
+        $newPost->category_id = $datas["category_id"];
+        $newPost->user_id = Auth::id();
         $newPost->save();
 
         return redirect()->route('posts.update', [$id])->with('success', "Le post a bien été créé.");
@@ -55,7 +59,8 @@ class PostController extends Controller
             "body" => $request->get("content"),
             "published" => 0,
             "draft" => 1,
-            "slug" => $request->get("slug")
+            "slug" => $request->get("slug"),
+            "category_id" => $request->get("category")
         ];
 
         if ($request->get("comments") !== null && $request->get("comments") === "on") {
@@ -78,6 +83,8 @@ class PostController extends Controller
         $newPost->slug = $datas["slug"];
         $newPost->allow_comments = $datas["allow_comments"];
         $newPost->allow_likes = $datas["allow_likes"];
+        $newPost->category_id = $datas["category_id"];
+        $newPost->user_id = Auth::id();
         $newPost->save();
 
         return redirect()->route('posts.list')->with('success', "Le post a bien été créé.");

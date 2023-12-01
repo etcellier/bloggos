@@ -51,8 +51,11 @@
                                         <div class="mt-2 w-full">
                                             <select required id="category" name="category" autocomplete="category-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
                                                 <option>-- Choisir une catégorie</option>
-                                                <option>Catégorie 1</option>
-                                                <option>Catégorie 2</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">
+                                                        {{ $category->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         @error('category')

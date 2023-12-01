@@ -27,14 +27,18 @@ Route::get('/dashboard', function () {
 Route::get('/posts', [PostController::class, 'list'])->middleware(['auth', 'verified'])->name('posts.list');
 
 Route::get('/posts/add', function() {
-    return view('posts.add');
+    $categories = \App\Models\Category::class::all();
+    $tags = \App\Models\Tag::class::all();
+    return view('posts.add', ["categories" => $categories, "tags" => $tags]);
 })->middleware(['auth', 'verified'])->name('posts.add');
 
 Route::post('/posts/add', [PostController::class, 'add'])->middleware(['auth', 'verified'])->name('posts.add');
 
 Route::get('/posts/edit/{id}', function($id) {
     $post = Post::find($id);
-    return view('posts.edit', ["post" => $post]);
+    $categories = \App\Models\Category::class::all();
+    $tags = \App\Models\Tag::class::all();
+    return view('posts.edit', ["post" => $post, "categories" => $categories, "tags" => $tags]);
 })->middleware(['auth', 'verified'])->name('posts.update');
 
 Route::post('/posts/edit/{id}', [PostController::class, "update"])->middleware(['auth', 'verified'])->name('posts.update');

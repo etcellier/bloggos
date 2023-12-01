@@ -18,7 +18,9 @@
                         <div class="p-6 col-4 text-gray-900 dark:text-gray-100 bg-white rounded hover:shadow transition-all flex flex-col h-full gap-2">
                             <div class="flex justify-between">
                                 <div class="flex gap-2">
-                                    <span class="font-bold me-3 text-xl">{{ $post->title }}</span>
+                                    <span class="font-bold me-3 text-xl">
+                                        <span class="text-slate-400 font-light text-base">{{ $post->category->slug }}/</span>{{ $post->title }}
+                                    </span>
                                     @if ($post->published)
                                         <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Publié</span>
                                     @else
