@@ -38,12 +38,16 @@ Route::get('/posts/add', function () {
 
 Route::post('/posts/add', [PostController::class, 'add'])->middleware(['auth', 'verified'])->name('posts.add');
 
-Route::get('/posts/edit/{id}', function ($id, PostController $postController) {
+Route::get('/posts/edit/{id}', function ($id) {
     $post = Post::find($id);
     $categories = \App\Models\Category::class::all();
     $tags = \App\Models\Tag::class::all();
-    $firstTagId = $post->tags->first()->id;
-    return view('posts.edit', ["post" => $post, "categories" => $categories, "tags" => $tags, "firstTagId" => $firstTagId]);
+    $selectedTags = $post->tags;
+    $selectedTagsFormatted = [];
+    foreach ($selectedTags as $tag) {
+        $selectedTagsFormatted[] = $tag->id;
+    }
+    return view('posts.edit', ["post" => $post, "categories" => $categories, "tags" => $tags, "selectedTags" => $selectedTagsFormatted]);
 })->middleware(['auth', 'verified'])->name('posts.update');
 
 Route::post('/posts/edit/{id}', [PostController::class, "update"])->middleware(['auth', 'verified'])->name('posts.update');

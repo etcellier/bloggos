@@ -70,6 +70,11 @@
                                     </svg>
                                 @endif
                             </div>
+                            <div class="flex gap-2">
+                                @foreach ($post->tags as $tag)
+                                    <div class="rounded-full py-0 px-2 border border-solid" style="border-color: {{$tag->color}}; color: {{$tag->color}}"><small>{{ $tag->name }}</small></div>
+                                @endforeach
+                            </div>
                         </div>
                     </a>
                 @endforeach
