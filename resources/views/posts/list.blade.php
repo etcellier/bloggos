@@ -36,6 +36,10 @@
                                 </svg>
                             </div>
                             <div class="flex gap-2">
+                                <span class="font-bold">Categorie</span> :
+                                <span style="color: {{ $post->category->color }}">{{ $post->category->name }}</span>
+                            </div>
+                            <div class="flex gap-2">
                                 @if ($post->allow_comments || $post->allow_likes)
                                     <span class="font-bold">Options</span> :
                                 @endif
