@@ -85,8 +85,12 @@
                                             <select id="tags" name="tags" autocomplete="tag-name"
                                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
                                                 <option>-- Choisir un tag</option>
-                                                <option>Tag 1</option>
-                                                <option>Tag 2</option>
+                                                @foreach ($tags as $tag)
+                                                    <option @if ($tag->tag_id === $tag->id) selected
+                                                            @endif value="{{ $tag->id }}">
+                                                        {{ $tag->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         @error('tags')

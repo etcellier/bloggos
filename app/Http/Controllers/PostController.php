@@ -49,7 +49,7 @@ class PostController extends Controller
         $newPost->user_id = Auth::id();
         $newPost->save();
 
-        return redirect()->route('posts.update', [$id])->with('success', "Le post a bien été modifié.");
+        return redirect()->route('posts.list', [$id])->with('success', "Le post a bien été modifié.");
     }
 
     public function add(AddPostRequest $request)
@@ -87,7 +87,7 @@ class PostController extends Controller
         $newPost->user_id = Auth::id();
         $newPost->save();
 
-        return redirect()->route('posts.update')->with('success', "Le post a bien été créé.");
+        return redirect()->route('posts.list')->with('success', "Le post a bien été créé.");
     }
 
     public function delete($id)
