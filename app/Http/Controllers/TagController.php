@@ -43,7 +43,6 @@ class TagController extends Controller
         $newTag->name = $datas["name"];
         $newTag->slug = $datas["slug"];
         $newTag->color = $datas["color"];
-
         $newTag->save();
 
         return redirect()->route('tag.list', [$newTag->id])->with('success', "Le tag a bien été créé.");

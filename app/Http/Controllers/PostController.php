@@ -49,6 +49,8 @@ class PostController extends Controller
         $newPost->user_id = Auth::id();
         $newPost->save();
 
+        $newPost->tags()->sync($request->get("tags"));
+
         return redirect()->route('posts.list', [$id])->with('success', "Le post a bien été modifié.");
     }
 
@@ -87,6 +89,8 @@ class PostController extends Controller
         $newPost->user_id = Auth::id();
         $newPost->save();
 
+        $newPost->tags()->sync($request->get("tags"));
+
         return redirect()->route('posts.list')->with('success', "Le post a bien été créé.");
     }
 
@@ -96,5 +100,12 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()->route('posts.list')->with('success', "Le post a bien été supprimé.");
+    }
+
+    public function getTags($id)
+    {
+        $post = Post::find($id);
+        $tags = $post->tags()->get();
+        dd($tags);
     }
 }
