@@ -23,63 +23,72 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/posts', [PostController::class, 'list'])->middleware(['auth', 'verified'])->name('posts.list');
-
-Route::get('/posts/add', function () {
-    $categories = \App\Models\Category::class::all();
-    $tags = \App\Models\Tag::class::all();
-    return view('posts.add', ["categories" => $categories, "tags" => $tags]);
-})->middleware(['auth', 'verified'])->name('posts.add');
-
-Route::post('/posts/add', [PostController::class, 'add'])->middleware(['auth', 'verified'])->name('posts.add');
-
-Route::get('/posts/edit/{id}', function ($id) {
-    $post = Post::find($id);
-    $categories = \App\Models\Category::class::all();
-    $tags = \App\Models\Tag::class::all();
-    $selectedTags = $post->tags;
-    $selectedTagsFormatted = [];
-    foreach ($selectedTags as $tag) {
-        $selectedTagsFormatted[] = $tag->id;
-    }
-    return view('posts.edit', ["post" => $post, "categories" => $categories, "tags" => $tags, "selectedTags" => $selectedTagsFormatted]);
-})->middleware(['auth', 'verified'])->name('posts.update');
-
-Route::post('/posts/edit/{id}', [PostController::class, "update"])->middleware(['auth', 'verified'])->name('posts.update');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/categories', [CategoryController::class, 'list'])->middleware(['auth', 'verified'])->name('category.list');
-Route::get('/categories/add', function () {
-    return view('category.add');
-})->middleware(['auth', 'verified'])->name('category.add');
-Route::post('/categories/add', [CategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('category.add');
-Route::get('/categories/edit/{id}', function ($id) {
-    $category = Category::find($id);
-    return view('category.edit', ["category" => $category]);
-})->middleware(['auth', 'verified'])->name('category.update');
-Route::post('/categories/edit/{id}', [CategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('category.update');
+// Admin
+Route::prefix('/admin')->group(function() {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/tags', [TagController::class, 'list'])->middleware(['auth', 'verified'])->name('tag.list');
-Route::get('/tags/add', function () {
-    return view('tag.add');
-})->middleware(['auth', 'verified'])->name('tag.add');
-Route::post('/tags/add', [TagController::class, 'add'])->middleware(['auth', 'verified'])->name('tag.add');
-Route::get('/tags/edit/{id}', function ($id) {
-    $tag = Tag::find($id);
-    return view('tag.edit', ["tag" => $tag]);
-})->middleware(['auth', 'verified'])->name('tag.update');
-Route::post('/tags/edit/{id}', [TagController::class, 'update'])->middleware(['auth', 'verified'])->name('tag.update');
+    Route::prefix('/posts')->group(function() {
+        Route::get('/', [PostController::class, 'list'])->middleware(['auth', 'verified'])->name('posts.list');
 
+        Route::get('/add', function () {
+            $categories = \App\Models\Category::class::all();
+            $tags = \App\Models\Tag::class::all();
+            return view('posts.add', ["categories" => $categories, "tags" => $tags]);
+        })->middleware(['auth', 'verified'])->name('posts.add');
 
+        Route::post('/add', [PostController::class, 'add'])->middleware(['auth', 'verified'])->name('posts.add');
+
+        Route::get('/edit/{id}', function ($id) {
+            $post = Post::find($id);
+            $categories = \App\Models\Category::class::all();
+            $tags = \App\Models\Tag::class::all();
+            $selectedTags = $post->tags;
+            $selectedTagsFormatted = [];
+            foreach ($selectedTags as $tag) {
+                $selectedTagsFormatted[] = $tag->id;
+            }
+            return view('posts.edit', ["post" => $post, "categories" => $categories, "tags" => $tags, "selectedTags" => $selectedTagsFormatted]);
+        })->middleware(['auth', 'verified'])->name('posts.update');
+
+        Route::post('/edit/{id}', [PostController::class, "update"])->middleware(['auth', 'verified'])->name('posts.update');
+    });
+
+    Route::prefix('/categories')->group(function() {
+        Route::get('/', [CategoryController::class, 'list'])->middleware(['auth', 'verified'])->name('category.list');
+        Route::get('/add', function () {
+            return view('category.add');
+        })->middleware(['auth', 'verified'])->name('category.add');
+        Route::post('/add', [CategoryController::class, 'create'])->middleware(['auth', 'verified'])->name('category.add');
+        Route::get('/edit/{id}', function ($id) {
+            $category = Category::find($id);
+            return view('category.edit', ["category" => $category]);
+        })->middleware(['auth', 'verified'])->name('category.update');
+        Route::post('/edit/{id}', [CategoryController::class, 'update'])->middleware(['auth', 'verified'])->name('category.update');
+    });
+
+    Route::prefix('/tags')->group(function() {
+        Route::get('/', [TagController::class, 'list'])->middleware(['auth', 'verified'])->name('tag.list');
+        Route::get('/add', function () {
+            return view('tag.add');
+        })->middleware(['auth', 'verified'])->name('tag.add');
+        Route::post('/add', [TagController::class, 'add'])->middleware(['auth', 'verified'])->name('tag.add');
+        Route::get('/edit/{id}', function ($id) {
+            $tag = Tag::find($id);
+            return view('tag.edit', ["tag" => $tag]);
+        })->middleware(['auth', 'verified'])->name('tag.update');
+        Route::post('/edit/{id}', [TagController::class, 'update'])->middleware(['auth', 'verified'])->name('tag.update');
+    });
+});
+
+// Front
 Route::get('/', [HomeController::class, 'index'])->name('app.index');
 Route::post('/', [CommentController::class, 'submit'])->name('app.index');
 Route::get('/like', [LikeController::class, 'like'])->name('app.action.like');
