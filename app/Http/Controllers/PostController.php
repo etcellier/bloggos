@@ -10,7 +10,8 @@ class PostController extends Controller
 {
     public function list()
     {
-        $posts = Post::all();
+        $userId = Auth::id();
+        $posts = Post::where('user_id', $userId)->get();
         return view('posts.list', ['posts' => $posts]);
     }
 
