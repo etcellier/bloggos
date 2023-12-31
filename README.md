@@ -17,7 +17,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. Clone the repository
 ```bash
-git clone https://github.com/etcellier/project.git
+git clone https://github.com/etcellier/bloggos.git
 ```
 
 2. Install PHP dependencies
@@ -48,3 +48,5 @@ npm run dev
 ## Authors
 
 - etcellier
+- nicolassshhh
+
